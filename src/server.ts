@@ -22,7 +22,7 @@ app.get('/view-all', (req, res) => {
         if (!fs.existsSync(storage)) {
             fs.mkdirSync(storage);
         }
-        const folderList = fs.readdirSync(storage)
+        const folderList = fs.readdirSync(storage).filter(item => fs.statSync(path.join(storage, item)).isDirectory());
         res.status(200).json({ "message": "view-all", "data": folderList })
     }
     catch (err) {
